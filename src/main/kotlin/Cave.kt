@@ -2,7 +2,7 @@
 class Cave (
     val bounds: Rectangle
 ) {
-    val backingArray = Array(bounds.rows) { Array<Tile?>(bounds.cols) { null } }
+    private val backingArray = Array(bounds.rows) { Array<Tile?>(bounds.cols) { null } }
 
     fun draw(line: Line) {
         for (point in line.allPoints()) {

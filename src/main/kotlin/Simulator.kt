@@ -13,7 +13,7 @@ class Simulator(private val cave: Cave) {
      * If the sand fell out of the cave (for part 1), set `done` to true and return.
      * If the sand settled, add 1 to `settledSand`.
      */
-    fun simulate() = sequence {
+    fun stepPoints() = sequence {
         var sand = SAND_ORIGIN
         if (cave.isFilled(sand)) {
             done = true
@@ -49,5 +49,10 @@ class Simulator(private val cave: Cave) {
 
         cave.fill(sand)
         settledSand += 1
+    }
+
+    /** Drop one grain of sand. Same as `stepPoints`, but without returning the falling sand positions. */
+    fun step() {
+        stepPoints().count() // consume the entire sequence without doing anything
     }
 }

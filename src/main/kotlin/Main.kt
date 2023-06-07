@@ -1,4 +1,4 @@
-import draw.StdoutAsciiDrawer
+import draw.GraphicalDrawer
 import java.io.File
 
 fun main() {
@@ -21,18 +21,18 @@ fun main() {
         cave.draw(line)
     }
 
-    val drawer = StdoutAsciiDrawer(cave)
+    val drawer = GraphicalDrawer(cave)
     val simulator = Simulator(cave)
     while (!simulator.done) {
-        for (fallingSandPosition in simulator.simulate()) {
-            if (DRAW_ANIMATION) {
+        if (DRAW_ANIMATION) {
+            for (fallingSandPosition in simulator.stepPoints()) {
                 drawer.draw(fallingSandPosition)
-                Thread.sleep(FRAME_TIME_MILLIS)
             }
+        } else {
+            simulator.step()
         }
     }
-    drawer.draw()
-    println(simulator.settledSand)
+    drawer.finish(simulator.settledSand)
 }
 
 /** Iterate through all the lines of rock drawn by the input. */

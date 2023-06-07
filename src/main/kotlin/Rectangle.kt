@@ -7,6 +7,7 @@ class Rectangle (
 ) {
     val cols = bottomRight.x - topLeft.x + 1
     val rows = bottomRight.y - topLeft.y + 1
+    val size = Point(cols, rows)
 
     operator fun contains(point: Point): Boolean {
         return point.x >= topLeft.x && point.y >= topLeft.y
@@ -21,4 +22,7 @@ class Rectangle (
             Point(max(bottomRight.x, point.x), max(bottomRight.y, point.y))
         )
     }
+
+    fun relative(point: Point): Point = point - topLeft
+    fun global(point: Point): Point = topLeft + point
 }

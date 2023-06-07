@@ -17,14 +17,12 @@ class Cave (
         false
     }
     internal operator fun get(point: Point): Tile? {
-        val offset = offset(point)
+        val offset = bounds.relative(point)
         return backingArray[offset.y][offset.x]
     }
 
     private operator fun set(point: Point, value: Tile) {
-        val offset = offset(point)
+        val offset = bounds.relative(point)
         backingArray[offset.y][offset.x] = value
     }
-
-    private fun offset(point: Point): Point = point - bounds.topLeft
 }

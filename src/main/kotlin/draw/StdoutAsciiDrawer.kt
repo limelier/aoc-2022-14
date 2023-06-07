@@ -1,6 +1,7 @@
 package draw
 
 import Cave
+import FRAME_TIME_MILLIS
 import Point
 import SAND_ORIGIN
 
@@ -30,5 +31,11 @@ class StdoutAsciiDrawer(cave: Cave) : Drawer(cave) {
             }
         }
         println()
+        Thread.sleep(FRAME_TIME_MILLIS)
+    }
+
+    override fun finish(totalSand: Int) {
+        draw()
+        println("Total sand grains: $totalSand")
     }
 }
